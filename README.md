@@ -1,0 +1,2 @@
+# BOJ
+Solo Algorithming :)
