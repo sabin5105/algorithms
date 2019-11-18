@@ -30,6 +30,5 @@ int main()
 		else if (arr[i][1] == a && arr[i][2] > b) ans++;
 		else if (arr[i][1] == a && arr[i][2] == b && arr[i][3] > c) ans++;
 	}
-	cout << ans;
-		
+	cout << ans;		
 }
