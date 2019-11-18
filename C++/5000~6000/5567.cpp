@@ -1,25 +1,48 @@
 #include<iostream>
+#include<vector>
+#include<algorithm>
+#include<queue>
+
 using namespace std;
-#define max 10000
+
+int n, m;
+vector<int> graph[10001];
+int cnt = 0;
+bool friendlist[501];
+
+void findFriend(int node)
+{
+	for (int i = 0; i < graph[node].size(); i++)
+	{
+			friendlist[graph[node][i]] = true;
+	}
+	if (node == 1)
+	{
+		for (int i = 0; i < graph[node].size(); i++)
+		{
+			findFriend(graph[node][i]);
+		}
+	}
+}
 
 int main()
 {
-	int n, m,a[max],b[max],store[max],num=0,ans=0;
-	store[0] = '1';
 	cin >> n >> m;
-	for (int i = 0; i = m; i++) {
-		cin >> a[i+1] >> b[i+1];
-		num++;
-		for (int j = 0; j = num + 1; j++) {
-			if (a[i+1] == store[j] && b[i+1] != store[j]){
-				store[i+1] = b[i+1];
-				ans++;
-			}
-			if (b[i+1] == store[j] && a[i+1] != store[j]) {
-				store[i+1] = a[i+1];
-				ans++;
-			}
-		}
+
+	for (int i = 0; i < m; i++)
+	{
+		int temp_a, temp_b;
+		cin >> temp_a >> temp_b;
+
+		graph[temp_a].push_back(temp_b);
+		graph[temp_b].push_back(temp_a);
 	}
-	cout << ans << endl;
+
+	findFriend(1);
+	for (int i = 2; i <= n; i++)
+	{
+		if (friendlist[i] == true)
+			cnt++;
+	}
+	cout << cnt << endl;
 }
