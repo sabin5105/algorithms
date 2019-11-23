@@ -1,36 +1,34 @@
 #include<iostream>
-#include<vector>
-#include<string>
 using namespace std;
+
+char arr[105][105];
+int row, col;
+pair<int, int> error;
 
 int main()
 {
-	int R, C;
-	cin >> R >> C;
-	char temp;
-	vector<vector<char>> str;
-	
-	for (int i = 0; i < R; i++) {
-		for (int j = 0; j < C; j++) {
-			str.push_back(temp);
-		}
-	}
-	int newR = 2 * R, newC = 2 * C;
-	for (int i = newR; i >= R; i--) {
-		for (int j = newC; j >= C; j--) {
-			str[i][j] = str[newR-i][newC-j];
-		}
-	}
-	int errX, errY;
-	cin >> errX >> errY;
-	if (str[errX][errY] = '.')
-		str[errX][errY] = '#';
-	else
-		str[errX][errY] = '.';
-	for (int i = 0; i < newR; i++) {
-		for (int j = 0; j < newC; j++) {
-			cout << str[i][j];
-		}
-	}
+	scanf("%d%d", &row, &col);
 
+	for (int i = 0; i < row; i++)
+		for (int j = 0; j < col; j++)
+		{
+			char temp;
+			cin >> temp;
+			arr[i][j] = arr[i][2 * col - 1 - j] = arr[2 * row - 1 - i][j] = arr[2 * row - 1 - i][2 * col - 1 - j] = temp;
+		}
+	scanf("%d%d", &error.first, &error.second);
+	error.first--;
+	error.second--;
+
+	if (arr[error.first][error.second] == '.')
+		arr[error.first][error.second] = '#';
+	else if (arr[error.first][error.second] == '#')
+		arr[error.first][error.second] = '.';
+
+	for (int i = 0; i < 2 * row; i++)
+	{
+		for (int j = 0; j < 2 * col; j++)
+			cout << arr[i][j];
+		cout << "\n";
+	}
 }
