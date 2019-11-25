@@ -1,40 +1,33 @@
-#pragma warning (disable : 4996)
-#include <stdio.h>
-#include <stdio.h>
+#include<iostream>
+#include<cmath>
+using namespace std;
 
-int selfnumber(int n) {
-	int sum = n;
+long int arr[10002];
+void selfnumber(int n)
+{
+	if (n > 10000)
+		return;
 
-	while (1) {
+	int log_n = log10(n);
+	int temp_n = n;
+	int index = n;
 
-		if (n == 0)
-			break;
-		sum += n % 10;
-		n = n / 10;
-
+	for (int i = log_n; i >= 0; i--)
+	{
+		index += temp_n / (int)pow(10, i);
+		temp_n = temp_n % (int)pow(10, i);
 	}
-
-	return sum;
+	arr[index] = 1;
+	selfnumber(n+1);
 }
+
 int main()
 {
-	int arr[10005];
+	fill(arr, arr + 10001, 0);
+	selfnumber(1);
 
-	for (int i = 0; i<10000; i++)
-	{
-		int idx = selfnumber(i);
-
-		if (idx <= 10000)
-		{
-			arr[idx] = true;
-		}
-
-	}
-	for (int i = 1; i<10000; i++)
-	{
-		if (arr[i])
-			printf("%d\n", i);
-	}
-
-	return 0;
+	cout << 1 << endl;
+	for (int i = 2; i <= 10000; i++)
+		if (arr[i] == 0)
+			cout << i << endl;
 }
