@@ -1,36 +1,50 @@
-#pragma warning (disable : 4996)
-#include <stdio.h>
+#include <iostream>
+#include <algorithm>
+using namespace std;
 
+const int MAX = 500000;
+int arr[MAX];
+int visited[8001];
 int main()
 {
-	int a[8005] = {0, };
-	int j, i, n, k, max = -4001, min = 4001, cnt = 0, mid = 0;
+	int n;
+	cin >> n;
+
 	double sum = 0;
-
-	scanf("%d", &n);
-	for (i = 0; i < n; i++);
+	int MAX_NUM = -4000, MIN_NUM = 4000;
+	for (int i = 0; i < n; i++)	// input
 	{
-		scanf("%d", &k);
-		a[4000 + k] += 1;
-
-		max = k > max ? k : max;
-		min = k < min ? k : min;
-		sum += k;
+		cin >> arr[i];
+		sum += arr[i];
+		visited[arr[i] + 4000]++;
+		MAX_NUM = max(MAX_NUM, arr[i]);
+		MIN_NUM = min(MIN_NUM, arr[i]);
 	}
 
-	for (i = 0; i < 8005; i++)
+	double average = sum / (double)n;
+	printf("%.0f\n", average);
+
+	sort(arr, arr + n);	// mid
+	cout << arr[n / 2] << "\n";
+
+	int num = -1;
+	int cnt = 0;
+	bool second = false;
+	for (int i = 0; i <= 8000; i++)	// mode
 	{
-		cnt += a[i];
-		if (cnt >= (1 + n) / 2)
+		if (cnt < visited[i])
 		{
-			mid = i - 4000;
-			break;
+			cnt = visited[i];
+			num = i;
+			second = false;
+		}
+		else if (cnt == visited[i] && !second)
+		{
+			num = i;
+			second = true;
 		}
 	}
-
-
-	printf("%.0f\n", sum / n);
-	printf("%d\n", mid);
-	printf("%d\n", max - min);
-
+	cout << num - 4000 << "\n";
+	cout << MAX_NUM - MIN_NUM << "\n";	// interval
+	return 0;
 }
