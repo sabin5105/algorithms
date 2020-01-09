@@ -1,46 +1,35 @@
 #include<iostream>
-#include<vector>
-#include<string>
 #include<algorithm>
-
+#include<string>
 using namespace std;
+
+bool cmp(char a, char b)
+{
+	if (a > b)
+		return true;
+	return false;
+}
 
 int main()
 {
+	string n;
+	cin >> n;
 
+	long long sum = 0;
+	bool zero = false;
+	for (int i = 0; i < n.size(); i++)
+	{
+		sum += (n[i] - '0');		//askii
+		if (!(n[i] - '0'))
+			zero = true;
+	}
+	if (sum % 3 || !zero)
+	{
+		cout << -1 << endl;
+	}
+	else
+	{
+		sort(n.begin(), n.end(),cmp);
+		cout << n << endl;
+	}
 }
-
-//int main()
-//{
-//	int max = 0, ans=0;
-//	string n;
-//	cin >> n;
-//	int arr[10];
-//	for (int i = 0; i < n.size(); i++)
-//	{
-//		arr[i] = n[i] - '0';
-//	}
-//	sort(arr, arr + (n.size()));
-//
-//	int res = 1;
-//	for (int i = 0; i < n.size(); i++)
-//		res *= 10;
-//	res /= 10;
-//	do
-//	{
-//		for (int i = n.size()-1; i >= 0; i--)
-//		{
-//			ans += res*arr[i];
-//			res = res / 10;
-//		}
-//
-//		if (ans % 30 == 0) {
-//			cout << ans;
-//			return 0;
-//		}
-//		res = 0;
-//	} while (next_permutation(n.begin(), n.end()));
-//	cout << "-1";
-//}
-// 위에는 오버 플로우 10^5개의 숫자이므로
-
