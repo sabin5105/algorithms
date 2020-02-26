@@ -1,17 +1,37 @@
-#pragma warning(disable :4996)
-#include <stdio.h>
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int m,n;
+int* arr;
+
+void getChe(int num) 
+{
+	arr = (int*)malloc(sizeof(int)*num);
+
+	for (int i = 2; i <= num; i++) 
+	{
+		arr[i] = i;
+	}
+
+	for (int i = 2; i <= num; i++) 
+	{
+		if (arr[i] == 0)
+			continue;
+		for (int j = i*2; j <= num; j += i) 
+		{
+				arr[j] = 0;
+		}
+	}
+	for (int i = m; i <= num; i++)
+	{
+		if (arr[i] != 0)
+			cout << arr[i] << " ";
+	}
+}
 
 int main()
 {
-	int i, j, m, n, a[100001] = { 0,1 };
-	scanf("%d", &m, &n);
-
-	for (i = 2; i <= n; i++)
-		for (j = 2; i*j <= n; j++)
-			a[i*j] = 1;
-
-	for (i = m; i <= n; i++)
-		if (a[i]!=1) 
-			printf("%d\n", i);
-
+	cin >> m >> n;
+	getChe(n);
 }
