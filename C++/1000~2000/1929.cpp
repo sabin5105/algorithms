@@ -2,12 +2,12 @@
 #include<vector>
 using namespace std;
 
+const int MAX = 1000000;
 int m,n;
-int* arr;
+int arr[MAX];
 
 void getChe(int num) 
 {
-	arr = (int*)malloc(sizeof(int)*num);
 
 	for (int i = 2; i <= num; i++) 
 	{
