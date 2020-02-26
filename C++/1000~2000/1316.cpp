@@ -50,3 +50,47 @@ int main(void) {
 
 	return 0;
 }
+
+// another thing
+#include<iostream>
+#include<string>
+#include<cstring>
+using namespace std;
+
+bool alphabet[26];
+int n;
+int cnt = 0;
+
+int main()
+{
+	cin >> n;
+	while (n--)
+	{
+		string s;
+		cin >> s;
+
+		bool flag = false;
+		char same = s[0];
+		alphabet[same - 'a'] = true;
+		for (int i = 1; i < s.length(); i++)
+		{
+			if (same == s[i])
+			{
+				alphabet[s[i] - 'a'] = true;
+				continue;
+			}
+			if (alphabet[s[i] - 'a'] == true)
+			{
+				flag = true;
+				break;
+			}
+			same = s[i];
+			alphabet[s[i] - 'a'] = true;
+		
+		}
+		memset(alphabet, 0, sizeof(alphabet));
+		if (flag == false)
+			cnt++;
+	}
+	cout << cnt;
+}
