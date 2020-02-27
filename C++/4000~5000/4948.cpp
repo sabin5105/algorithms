@@ -1,27 +1,44 @@
-#pragma warning(disable:4996)
-#include<cstdio>
-#define MAX 246913
+#include<iostream>
+#include<vector>
+using namespace std;
+
+const int MAX = 1000000;
+int m,n;
 int arr[MAX];
+int cnt = 0;
+
+void getChe(int num) 
+{
+	cnt = 0;
+	for (int i = 2; i <= num; i++) 
+	{
+		arr[i] = i;
+	}
+
+	for (int i = 2; i <= num; i++) 
+	{
+		if (arr[i] == 0)
+			continue;
+		for (int j = i+i; j <= num; j += i) 
+		{
+				arr[j] = 0;
+		}
+	}
+	for (int i = n+1; i <= num; i++)
+	{
+		if (arr[i] != 0)
+			cnt++;
+	}
+}
 
 int main()
 {
-	arr[1] = arr[0] = 1;
-	for (int i = 2; i < MAX; i++) {
-		if (!arr[i]) {
-			for (int j = i + i; j < MAX; j += i)
-				arr[j] = 1;
-		}
-	}
 	while (1)
 	{
-		int n, cnt = 0;
-		scanf("%d", &n);
-		if (!n)break;
-		for (int i = n + 1; i <= 2 * n; i++) {
-			if (!arr[i])
-				cnt++;
-		}
-		printf("%d\n", cnt);
-
+		cin >> n;
+		if (n == 0)
+			break;
+		getChe(2*n);
+		cout << cnt << endl;
 	}
 }
