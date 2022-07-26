@@ -17,3 +17,5 @@ from(
 ) as temp
 group by RowNums;
 ```
+
+<img width="518" alt="image" src="https://user-images.githubusercontent.com/50198431/181025782-52cd727a-9272-4608-be07-7473d4b74b2d.png">
